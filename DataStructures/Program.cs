@@ -7,45 +7,68 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            //ArrayDemo();
+			//ArrayDemo();
 
-            //LinkedListDemo();
+			//LinkedListDemo();
 
-            //Linear Search
-            //int search = 0;
-            //Console.WriteLine("Marks list: { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 }");
-            //do
-            //{
-            //    Console.Write("Enter marks to search and press enter: ");
-            //    string input = Console.ReadLine();
-            //    search = Int32.Parse(input);
-            //    Console.WriteLine($"Marks {search} was found at position {FindThroughLinearSearch(search)} in the array.");
-            //}
-            //while (search > 0);
+			//Linear Search
+			//int search = 0;
+			//Console.WriteLine("Marks list: { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 }");
+			//do
+			//{
+			//    Console.Write("Enter marks to search and press enter: ");
+			//    string input = Console.ReadLine();
+			//    search = Int32.Parse(input);
+			//    Console.WriteLine($"Marks {search} was found at position {FindThroughLinearSearch(search)} in the array.");
+			//}
+			//while (search > 0);
 
-            //sort numbers
-            //int[] target = { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
+			//sort numbers
+			//int[] target = { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
 
-            //Console.WriteLine("Unsorted array ------");
-            //ShowArray(target);
+			//Console.WriteLine("Unsorted array ------");
+			//ShowArray(target);
 
-            //SelectionSort(target);
+			//BubbleSort(target);
 
-            //Console.WriteLine("Sorted array ------");
-            //ShowArray(target);
+			//Console.WriteLine("Sorted array ------");
+			//ShowArray(target);
 
-            //binary search
-            int search = 0;
-            Console.WriteLine("Marks list: 56 67 67 76 79 82 83 88 90 98");
-            do
-            {
-                Console.Write("Enter marks to search and press enter: ");
-                string input = Console.ReadLine();
-                search = Int32.Parse(input);
-                Console.WriteLine($"Marks {search} was found at position {FindThroughBinarySearch(search)} in the array.");
-            }
-            while (search > 0);
-        }
+			//binary search
+
+
+			// BubbleSort
+
+			//int search = 0;
+			//Console.WriteLine("Marks list: 56 67 67 76 79 82 83 88 90 98");
+			//do
+			//{
+			//    Console.Write("Enter marks to search and press enter: ");
+			//    string input = Console.ReadLine();
+			//    search = Int32.Parse(input);
+			//    Console.WriteLine($"Marks {search} was found at position {FindThroughBinarySearch(search)} in the array.");
+			//}
+			//while (search > 0);
+
+			//studentProject class
+
+			string[] cities = StudentProject.ReadCities();
+			Console.WriteLine("Unsorted cities ------");
+			StudentProject.DisplayCities(cities);
+			StudentProject.SortCities(cities);
+			Console.WriteLine("Sorted cities ------");
+			StudentProject.DisplayCities(cities);
+
+			string input = "";
+			do
+			{
+				Console.Write("Enter city to search and press enter: ");
+				input = Console.ReadLine();
+				Console.WriteLine($"City {input} was found at position {StudentProject.FindCity(cities, input)} in the array.");
+			}
+			while (input != "end");
+
+		}
 
         static int FindThroughBinarySearch(int findNumber)
         {
@@ -101,7 +124,7 @@ namespace DataStructures
             targetArray[i] = targetArray[j];
             targetArray[j] = temp;
         }
-        
+
 
         static void ShowArray(int[] targetArray)
         {
@@ -167,14 +190,14 @@ namespace DataStructures
             Console.WriteLine("TOTAL = " + total + "/600 = " + (total * 100 / 600) + " percent");
         }
 
- 
+
         static void LinkedListDemo()
         {
             //declare LL and node objects
             SingleLinkedList list = new SingleLinkedList();
-            
+
             Node n = new Node();
-            
+
             //prepare the LL by inserting elements
             n.Data = "root";
             list.Add(n);
@@ -204,7 +227,7 @@ namespace DataStructures
         static int FindThroughLinearSearch(int findNumber)
         {
             int[] marks = new int[10] { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
-            
+
             for (int i = 0; i < marks.Length; i++)
             {
                 if (marks[i] == findNumber)
@@ -212,6 +235,20 @@ namespace DataStructures
             }
             return -1;
         }
-        
+
+        static void BubbleSort(int[] targetArray)
+        {
+            for (int i = 1; i < targetArray.Length; i++)
+            {
+                for (int j = 0; j < targetArray.Length - i; j++)
+                {
+                    if (targetArray[j] > targetArray[j + 1])
+                    {
+                        Swap(targetArray, j, j + 1);
+                    }
+                }
+            }
+        }
+
     }
 }

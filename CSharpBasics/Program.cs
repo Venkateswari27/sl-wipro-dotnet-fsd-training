@@ -1,169 +1,166 @@
 ﻿using System;
-using System.IO;
 
-namespace CSharpBasics
+namespace CSharpPractice
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Inside Main, Program is starting ========");
+            //Convert minutes to seconds ------------------
+            //ConvertToSeconds(5);
 
-            PrimitiveDemo();
+            //Invoke Area of a Triangle ------------------
+            //Console.WriteLine("To find area of a triangle:");
 
-            DayOfWeek(5);
+            //Console.Write("Enter side:");
+            //float side = Convert.ToSingle(Console.ReadLine());
 
-            LoopDemo();
+            //Console.Write("Enter height:");
+            //float height = Convert.ToSingle(Console.ReadLine());
 
-            DateDemo();
+            //Console.WriteLine($"Area of a triangle with side {side} units and height {height} units equals {AreaOfTriangle(side, height)} square units.");
 
-            TextFileDemo();
+            //Invoke IsSumLessThanHundred ------------------
+            //IsSumLessThanHundred(10, 90);
+            //IsSumLessThanHundred(99, 0);
+            //IsSumLessThanHundred(100, 1);
 
-            Console.WriteLine("Program has ended, this was the last line ========");
-        }
+            //Console.WriteLine("Check if the sum of two numbers is less than 100 or not:");
 
-        static void PrimitiveDemo()
-        {
-            Console.WriteLine("Demonstrating Primitives...");
+            //Console.Write("Enter number1: ");
+            //int n1 = Convert.ToInt16(Console.ReadLine());
 
-            int x = 100;
-            string s = "My Test string";
-            bool b = false;
-            
-            const float HUNDRED_PERCENT = 100.00f;
-            float f = 99.00f;
+            //Console.Write("Enter number2: ");
+            //int n2 = Convert.ToInt16(Console.ReadLine());
 
-            if (b)
-            {
-                Console.WriteLine("b is true");
-            }
-            else
-            {
-                Console.WriteLine("b is false");
-            }
+            //IsSumLessThanHundred(n1, n2);
 
-            if (x > 100)
-                Console.WriteLine("x more than 100");
-            else
-                Console.WriteLine("x less than or equal to 100");
+            //Name shuffle ----------------
+            //NameShuffle("Rajeev Sharma");
+            //NameShuffle("Rosie O'Donnell");
 
-            if (s == "test")
-                Console.WriteLine("s equals 'test'");
-            else
-                Console.WriteLine("s doesn't equal 'test'");
+            //demo Factorial
+            //int number = 0;
 
-            if (f == HUNDRED_PERCENT)
-                Console.WriteLine("f is hundred percent");
-            else
-                Console.WriteLine("f is less than or equal to 100%");
-        }
-
-        static void DayOfWeek(int day) //Switch demo
-        {
-            switch (day)
-            {
-                case 1: 
-                    Console.WriteLine("Day Sunday");
-                    break;
-                case 2: 
-                    Console.WriteLine("Day Monday");
-                    break;
-                case 3:
-                    Console.WriteLine("Day Tue");
-                    break;
-                case 4:
-                    Console.WriteLine("Day Wed");
-                    break;
-                case 5:
-                    Console.WriteLine("Day Thu");
-                    break;
-                case 6:
-                    Console.WriteLine("Day Fri");
-                    break;
-                case 7:
-                    Console.WriteLine("Day Sat");
-                    break;
-                default: 
-                    Console.WriteLine("Invalid Day");
-                    break;
-            }
-        }
-
-        static void LoopDemo()
-        {
-            //for (int i = 0; i < 10; i++)
+            //do
             //{
-            //    Console.WriteLine("Value of i = " + i.ToString());
-            //    DayOfWeek(i);
+            //    Console.Write("Please enter the number to calculate factorial: ");
+            //    number = Convert.ToInt16(Console.ReadLine());
+            //    if (number <= 0)
+            //    {
+            //        Console.WriteLine("To calculate factorial please enter a positive integer.");
+            //    }
             //}
+            //while (number <= 0);
 
-            int j = 0;
-            while (j < 10)
-            {
-                Console.WriteLine("Value of j = " + j.ToString());
-                DayOfWeek(j);
-                j++;
-            }
+            //Console.WriteLine($"{number}! = {Factorial(number)}");
+
+            Collatz(10);
+            Collatz(100);
         }
 
-        static void DateDemo()
+        /// <summary>
+        /// Repeatedly evaluate following operations, until reaching 1 and display the number of steps it took.
+        /// If n is even -> n / 2, If n is odd -> n * 3 + 1
+        /// </summary>
+        /// <param name="number"></param>
+        static void Collatz(uint number)
         {
-            DateTime dt = DateTime.Now;
-            Console.WriteLine("Current date and time :" + dt.ToString());
-            Console.WriteLine("Formatted short date:" + dt.ToShortDateString());
-            Console.WriteLine("Formatted long  date:" + dt.ToLongDateString());
-            Console.WriteLine("Formatted custom date strings:");
-            Console.WriteLine(dt.ToString("d"));
-            Console.WriteLine(dt.ToString("D"));
-            Console.WriteLine(dt.ToString("F"));
-            Console.WriteLine(dt.ToString("y"));
-
-            Console.WriteLine("Adding 5 days to today:" + dt.AddDays(5).ToShortDateString());
-
-            DateTime date1 = new DateTime(2019, 1, 2, 4, 0, 15);
-            DateTime date2 = new DateTime(2019, 1, 2, 14, 0, 15);
-            TimeSpan value = date2.Subtract(date1);
-            Console.WriteLine("TimeSpan between two dates is {0} hours", value);
-        }
-
-        static void TextFileDemo()
-        {
-            //Create full file name and path
-            string dir = Directory.GetCurrentDirectory();
-            string filename = dir + "\\data.txt";
-
-            //check if the file exists or not. if not create it
-            if (File.Exists(filename))
-                Console.WriteLine(filename + " exists");
-            else
+            int steps = 0;
+            uint n = number;
+            while (n > 1)
             {
-                Console.WriteLine(filename + " does not exist");
+                string evenOrOddString;
+                string stepDescriptionString;
 
-                using (StreamWriter wrt = File.CreateText(filename))
+                if (n % 2 == 0) //check if the number is even
                 {
-                    wrt.WriteLine("This is line one");
-                    wrt.WriteLine("This is line two");
-                    wrt.WriteLine("This is line three");
-                    wrt.WriteLine("This is line four");
+                    evenOrOddString = "even";
+                    stepDescriptionString = $"{n} / 2 = ";
                 }
-                
-                Console.WriteLine(filename + " created");
+                else
+                {
+                    evenOrOddString = "odd";
+                    stepDescriptionString = $"{n} * 3 + 1 = ";
+                }
+
+                uint previousNo = n; //save the number to display it later
+                n = (n % 2 == 0) ? (n / 2) : (n * 3 + 1); //collatz step based on the requirement
+                steps++;
+
+                //10 is even - 10 / 2 = 5
+                //5 is odd - 5 * 3 + 1 = 16
+                Console.WriteLine($"{steps}. {previousNo} is {evenOrOddString} - {stepDescriptionString}{n} ");
             }
 
-            //read the file line by line and display each line
-            Console.WriteLine("Display the file line by line ------------");
-            string[] lines = File.ReadAllLines(filename);
-            foreach (string s in lines)
-            {
-                Console.WriteLine(s);
-            }
-
-            Console.WriteLine("Display the file in one go ------------");
-            string text = File.ReadAllText(filename);
-            Console.WriteLine(text);
-
-            //File.Delete(filename);
-            //Console.WriteLine(filename + " was deleted");
+            Console.WriteLine($"Totals steps for Collatz({number}) is {steps}.");
         }
+
+        /// <summary>
+        /// Calculates the factorial of the passed hnumber
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        static long Factorial(int number)
+        {
+            //non recursive way
+            long factorial = 1;
+            for (int i = number; i > 0; i--)
+            {
+                factorial *= i;
+            }
+            return factorial;
+
+            //recursive way
+            //if (number > 0) //terminating condition for recursion
+            //    return number * Factorial(number - 1);
+
+            //return 1;
+        }
+
+        static void ConvertToSeconds(int minutes)
+        {
+            Console.WriteLine($"{minutes} minutes equals {minutes * 60} seconds");
+        }
+
+        static double AreaOfTriangle(float side, float height)
+        {
+            return (double)(side * height / 2);
+        }
+
+        /// <summary>
+        /// Checks if the sum of two numbers is less than 100 or not
+        /// </summary>
+        /// <param name="number1">Number 1</param>
+        /// <param name="number2">Number 2</param>
+        static void IsSumLessThanHundred(int number1, int number2)
+        {
+            //string.Format("{0} + {1} is LESS THAN 100", number1, number2);
+
+            if (number1 + number2 < 100)
+                Console.WriteLine($"{number1} + {number2} is LESS THAN 100");
+            else
+                Console.WriteLine($"{number1} + {number2} is NOT LESS THAN 100");
+        }
+
+        /// <summary>
+        /// Accepts a string (of a person's first and last name) and returns a string with the first and last name swapped.
+        /// Assumption: There will be exactly one space between the first and last name.
+        /// </summary>
+        /// <param name="fullName"></param>
+        static void NameShuffle(string fullName)
+        {
+            //way 1
+            //string[] nameArray = fullName.Split(' ');
+            //Console.WriteLine($"\"{fullName}\" --> {nameArray[1]} {nameArray[0]}");
+
+            //way 2
+            int spacePosition = fullName.IndexOf(' ');
+
+            Console.WriteLine($"\"{fullName}\" --> {fullName.Substring(spacePosition + 1)} {fullName.Substring(0, spacePosition)}");
+        }
+
+
     }
 }
+
