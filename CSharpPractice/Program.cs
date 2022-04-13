@@ -6,7 +6,7 @@ namespace CSharpPractice
     {
         static void Main(string[] args)
         {
-            //Convert minutes to seconds ------------------
+            //Convert minutes to seconds; ------------------
             //ConvertToSeconds(5);
 
             //Invoke Area of a Triangle ------------------
@@ -55,8 +55,8 @@ namespace CSharpPractice
 
             //Console.WriteLine($"{number}! = {Factorial(number)}");
 
-            Collatz(10);
-            Collatz(100);
+            //Collatz(10);
+            //Collatz(100);
         }
 
         /// <summary>
@@ -157,9 +157,9 @@ namespace CSharpPractice
             //way 2
             int spacePosition = fullName.IndexOf(' ');
 
-            Console.WriteLine($"\"{fullName}\" --> {fullName.Substring(spacePosition+1)} {fullName.Substring(0, spacePosition)}");
+            Console.WriteLine($"\"{fullName}\" --> {fullName.Substring(spacePosition + 1)} {fullName.Substring(0, spacePosition)}");
         }
 
-        
+
     }
 }
