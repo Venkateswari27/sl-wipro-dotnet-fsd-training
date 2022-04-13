@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DataStructures
 {
@@ -7,74 +6,72 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-			//ArrayDemo();
+            //ArrayDemo();
 
-			//LinkedListDemo();
+            //LinkedListDemo();
 
-			//Linear Search
-			//int search = 0;
-			//Console.WriteLine("Marks list: { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 }");
-			//do
-			//{
-			//    Console.Write("Enter marks to search and press enter: ");
-			//    string input = Console.ReadLine();
-			//    search = Int32.Parse(input);
-			//    Console.WriteLine($"Marks {search} was found at position {FindThroughLinearSearch(search)} in the array.");
-			//}
-			//while (search > 0);
+            //Linear Search ==================
+            //int search = 0;
+            //Console.WriteLine("Marks list: { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 }");
+            //do
+            //{
+            //    Console.Write("Enter marks to search and press enter: ");
+            //    string input = Console.ReadLine();
+            //    search = Int32.Parse(input);
+            //    Console.WriteLine($"Marks {search} was found at position {FindThroughLinearSearch(search)} in the array.");
+            //}
+            //while (search > 0);
 
-			//sort numbers
-			//int[] target = { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
+            //sort numbers =====================
+            //int[] target = { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
 
-			//Console.WriteLine("Unsorted array ------");
-			//ShowArray(target);
+            //Console.WriteLine("Unsorted array ------");
+            //ShowArray(target);
 
-			//BubbleSort(target);
+            ////SelectionSort(target);
+            ////BubbleSort(target);
+            ////MergeSort(target, 0, 9);
+            //QuickSort(target, 0, 9);
 
-			//Console.WriteLine("Sorted array ------");
-			//ShowArray(target);
+            //Console.WriteLine("Sorted array ------");
+            //ShowArray(target);
 
-			//binary search
+            //binary search =====================
+            //int search = 0;
+            //Console.WriteLine("Marks list: 56 67 67 76 79 82 83 88 90 98");
+            //do
+            //{
+            //    Console.Write("Enter marks to search and press enter: ");
+            //    string input = Console.ReadLine();
+            //    search = Int32.Parse(input);
+            //    Console.WriteLine($"Marks {search} was found at position {FindThroughBinarySearch(search)} in the array.");
+            //}
+            //while (search > 0);
 
+            //Student Project =====================
+            string[] cities = StudentProject.ReadCities();
+            Console.WriteLine("Unsorted cities ------");
+            StudentProject.DisplayCities(cities);
+            StudentProject.SortCities(cities);
+            Console.WriteLine("Sorted cities ------");
+            StudentProject.DisplayCities(cities);
 
-			// BubbleSort
+            string input = "";
+            do
+            {
+                Console.Write("Enter city to search and press enter: ");
+                input = Console.ReadLine();
+                Console.WriteLine($"City {input} was found at position {StudentProject.FindCity(cities, input)} in the array.");
+            }
+            while (input != "end");
+        }
 
-			//int search = 0;
-			//Console.WriteLine("Marks list: 56 67 67 76 79 82 83 88 90 98");
-			//do
-			//{
-			//    Console.Write("Enter marks to search and press enter: ");
-			//    string input = Console.ReadLine();
-			//    search = Int32.Parse(input);
-			//    Console.WriteLine($"Marks {search} was found at position {FindThroughBinarySearch(search)} in the array.");
-			//}
-			//while (search > 0);
-
-			//studentProject class
-
-			string[] cities = StudentProject.ReadCities();
-			Console.WriteLine("Unsorted cities ------");
-			StudentProject.DisplayCities(cities);
-			StudentProject.SortCities(cities);
-			Console.WriteLine("Sorted cities ------");
-			StudentProject.DisplayCities(cities);
-
-			string input = "";
-			do
-			{
-				Console.Write("Enter city to search and press enter: ");
-				input = Console.ReadLine();
-				Console.WriteLine($"City {input} was found at position {StudentProject.FindCity(cities, input)} in the array.");
-			}
-			while (input != "end");
-
-		}
-
+        #region Searching
         static int FindThroughBinarySearch(int findNumber)
         {
             int[] marks = new int[10] { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
 
-            marks = SelectionSort(marks);
+            SelectionSort(marks);
 
             int minNum = 0;
             int maxNum = marks.Length - 1;
@@ -86,7 +83,7 @@ namespace DataStructures
                 int mid = (minNum + maxNum) / 2;
                 if (findNumber == marks[mid])
                 {
-                    foundElem = ++mid;
+                    foundElem = mid;
                     break;
                 }
                 else if (findNumber < marks[mid])
@@ -102,7 +99,124 @@ namespace DataStructures
             return foundElem;
         }
 
-        static int[] SelectionSort(int[] targetArray)
+        /// <summary>
+        /// Search the passed number in an array of number using Linear Search
+        /// </summary>
+        /// <param name="findNumber"></param>
+        /// <returns>Returns position in the array or -1</returns>
+        static int FindThroughLinearSearch(int findNumber)
+        {
+            int[] marks = new int[10] { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
+
+            for (int i = 0; i < marks.Length; i++)
+            {
+                if (marks[i] == findNumber)
+                    return i;
+            }
+            return -1;
+        }
+
+        #endregion 
+
+        #region Sorting
+
+        static void MergeSort(int[] targetArray, int p, int r)
+        {
+            if (p < r)
+            {
+                int q = (p + r) / 2;
+                MergeSort(targetArray, p, q);
+                MergeSort(targetArray, q + 1, r);
+                Merge(targetArray, p, q, r);
+            }
+        }
+
+        static void Merge(int[] arr, int p, int q, int r)
+        {
+            int i, j, k;
+            int n1 = q - p + 1;
+            int n2 = r - q;
+            int[] L = new int[n1];
+            int[] R = new int[n2];
+            for (i = 0; i < n1; i++)
+            {
+                L[i] = arr[p + i];
+            }
+            for (j = 0; j < n2; j++)
+            {
+                R[j] = arr[q + 1 + j];
+            }
+            i = 0;
+            j = 0;
+            k = p;
+            while (i < n1 && j < n2)
+            {
+                if (L[i] <= R[j])
+                {
+                    arr[k] = L[i];
+                    i++;
+                }
+                else
+                {
+                    arr[k] = R[j];
+                    j++;
+                }
+                k++;
+            }
+            while (i < n1)
+            {
+                arr[k] = L[i];
+                i++;
+                k++;
+            }
+            while (j < n2)
+            {
+                arr[k] = R[j];
+                j++;
+                k++;
+            }
+        }
+
+        static int Partition(int[] array, int low, int high)
+        {
+            //1. Select a pivot point.
+            int pivot = array[high];
+
+            int lowIndex = (low - 1);
+
+            //2. Reorder the collection.
+            for (int j = low; j < high; j++)
+            {
+                if (array[j] <= pivot)
+                {
+                    lowIndex++;
+
+                    int temp = array[lowIndex];
+                    array[lowIndex] = array[j];
+                    array[j] = temp;
+                }
+            }
+
+            int temp1 = array[lowIndex + 1];
+            array[lowIndex + 1] = array[high];
+            array[high] = temp1;
+
+            return lowIndex + 1;
+        }
+
+        static void QuickSort(int[] array, int low, int high)
+        {
+            if (low < high)
+            {
+                int partitionIndex = Partition(array, low, high);
+
+                //3. Recursively continue sorting the array
+                QuickSort(array, low, partitionIndex - 1);
+                QuickSort(array, partitionIndex + 1, high);
+            }
+        }
+
+        static void SelectionSort(int[] targetArray)
         {
             for (int i = 0; i < targetArray.Length - 1; i++)
             {
@@ -115,7 +229,22 @@ namespace DataStructures
                 }
             }
 
-            return targetArray;
+        }
+
+        static void BubbleSort(int[] targetArray)
+        {
+            for (int i = 1; i < targetArray.Length; i++)
+            {
+                for (int j = 0; j < targetArray.Length - i; j++)
+                {
+                    if (targetArray[j] > targetArray[j + 1])
+                    {
+                        Swap(targetArray, j, j + 1);
+                    }
+                }
+                Console.Write($"Pass {i}: ");
+                ShowArray(targetArray);
+            }
         }
 
         static void Swap(int[] targetArray, int i, int j)
@@ -124,7 +253,6 @@ namespace DataStructures
             targetArray[i] = targetArray[j];
             targetArray[j] = temp;
         }
-
 
         static void ShowArray(int[] targetArray)
         {
@@ -142,6 +270,10 @@ namespace DataStructures
                 Console.Write(targetArray[i] + " ");
             Console.WriteLine();
         }
+
+        #endregion
+
+        #region Array Demo
 
         static void ArrayDemo()
         {
@@ -190,6 +322,9 @@ namespace DataStructures
             Console.WriteLine("TOTAL = " + total + "/600 = " + (total * 100 / 600) + " percent");
         }
 
+        #endregion 
+
+        #region Singly Linked List Demo
 
         static void LinkedListDemo()
         {
@@ -219,36 +354,7 @@ namespace DataStructures
             }
         }
 
-        /// <summary>
-        /// Search the passed number in an array of number using Linear Search
-        /// </summary>
-        /// <param name="findNumber"></param>
-        /// <returns>Returns position in the array or -1</returns>
-        static int FindThroughLinearSearch(int findNumber)
-        {
-            int[] marks = new int[10] { 56, 90, 76, 88, 82, 67, 98, 83, 67, 79 };
-
-            for (int i = 0; i < marks.Length; i++)
-            {
-                if (marks[i] == findNumber)
-                    return i;
-            }
-            return -1;
-        }
-
-        static void BubbleSort(int[] targetArray)
-        {
-            for (int i = 1; i < targetArray.Length; i++)
-            {
-                for (int j = 0; j < targetArray.Length - i; j++)
-                {
-                    if (targetArray[j] > targetArray[j + 1])
-                    {
-                        Swap(targetArray, j, j + 1);
-                    }
-                }
-            }
-        }
+        #endregion
 
     }
 }

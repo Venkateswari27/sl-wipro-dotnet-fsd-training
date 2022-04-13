@@ -1,26 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataStructures
 {
-	public class StudentProject
-	{
+    /// <summary>
+    /// Student Project:
+    /// Step 1: Create a text file with following city values - one value per line:
+    ///    Mumbai, Delhi, Bangalore , Hyderabad, Ahmedabad, Chennai, Kolkata, Surat, Pune, Jaipur, Lucknow, Kanpur, Nagpur, Indore, Thane
+    /// Step 2: Read the text file into an array of strings
+    /// Step 3: Display the contents of the array
+    /// Step 4: Sort the array using Selection or Bubble sort algorithm
+    /// Step 5: Display the sorted array
+    /// Step 6. Enable searching through the array using Binary search
+    /// </summary>
+    public class StudentProject
+    {
         public static string[] ReadCities()
         {
-            string citiesFileName = "C:\\Users\\Hemanth Nandyala\\Desktop\\cities.txt";
-			return System.IO.File.ReadAllLines(citiesFileName);
-		}
-		public static void DisplayCities(string[] cities)
-		{
-			foreach (string city in cities)
-			{
-				Console.Write(city + " ");
-			}
-			Console.WriteLine();
-		}
+            string citiesFileName = "C:\\Training\\cities.txt";
+            return System.IO.File.ReadAllLines(citiesFileName);
+        }
 
-		public static void SortCities(string[] cities)
+        public static void DisplayCities(string[] cities)
+        {
+            foreach (string city in cities)
+            {
+                Console.Write(city + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static void SortCities(string[] cities)
         {
             for (int i = 0; i < cities.Length - 1; i++)
             {
@@ -29,12 +38,10 @@ namespace DataStructures
                     if (string.Compare(cities[i], cities[j]) > 0)
                         Swap(cities, i, j);
                 }
-                //selection sort algorithm
             }
         }
         public static int FindCity(string[] cities, string city)
         {
-            //binary search
             SortCities(cities);
 
             int minNum = 0;
